@@ -69,30 +69,44 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         t1 = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
         l1 = new javax.swing.JLabel();
         l2 = new javax.swing.JLabel();
         b2 = new javax.swing.JButton();
         c1 = new javax.swing.JComboBox<>();
         t2 = new javax.swing.JPasswordField();
+        jLabel4 = new javax.swing.JLabel();
+
+        jLabel3.setText("jLabel3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(51, 102, 255));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel1.setText("DOCUMENTO:");
-
-        jLabel2.setText("CONTRASEÑA:");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 70, -1, -1));
 
         t1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 t1KeyReleased(evt);
             }
         });
+        getContentPane().add(t1, new org.netbeans.lib.awtextra.AbsoluteConstraints(242, 107, 196, 33));
+
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel2.setText("CONTRASEÑA:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, -1, -1));
 
         l1.setForeground(new java.awt.Color(255, 0, 0));
+        getContentPane().add(l1, new org.netbeans.lib.awtextra.AbsoluteConstraints(329, 24, -1, -1));
 
         l2.setForeground(new java.awt.Color(255, 0, 0));
+        getContentPane().add(l2, new org.netbeans.lib.awtextra.AbsoluteConstraints(329, 42, -1, -1));
 
         b2.setText("Iniciar sesion");
         b2.addActionListener(new java.awt.event.ActionListener() {
@@ -100,54 +114,14 @@ public class Login extends javax.swing.JFrame {
                 b2ActionPerformed(evt);
             }
         });
+        getContentPane().add(b2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 360, -1, -1));
 
         c1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Empleado", "Mecanico", "Administrador", " " }));
+        getContentPane().add(c1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 280, 301, 36));
+        getContentPane().add(t2, new org.netbeans.lib.awtextra.AbsoluteConstraints(242, 199, 196, 30));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(c1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addGap(33, 33, 33)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(t1, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
-                            .addComponent(t2))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(l2)
-                            .addComponent(l1)))
-                    .addComponent(b2))
-                .addContainerGap(56, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(t1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(l1))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(l2)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(t2, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-                        .addComponent(jLabel2)))
-                .addGap(18, 18, 18)
-                .addComponent(c1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(b2)
-                .addContainerGap())
-        );
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/7d514ce90eed62493f6938af1c26a477.jpg"))); // NOI18N
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 1, 670, 480));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -240,6 +214,8 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> c1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel l1;
     private javax.swing.JLabel l2;
     private javax.swing.JTextField t1;

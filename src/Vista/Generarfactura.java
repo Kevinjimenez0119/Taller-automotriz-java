@@ -33,12 +33,12 @@ public class Generarfactura extends javax.swing.JFrame {
     public void mostrar()
     {
         DefaultTableModel modelo=new DefaultTableModel();
-        ResultSet re=obj.obj.n2.llenartabla("select * from reportes");
-        modelo.setColumnIdentifiers(new Object[]{"idreporte","descripcion","tipo","idrepuesto","valor","idmecanico","idmatricula","idcliente"});
+        ResultSet re=obj.obj.n2.llenartabla("select * from facturas");
+        modelo.setColumnIdentifiers(new Object[]{"idfactura","fecha","valor","idmatricula","idcliente","idmecanico"});
         try {
             while(re.next())
             {
-                modelo.addRow(new Object[]{re.getInt(1),re.getString(2),re.getString(3),re.getInt(4),re.getInt(5),re.getString(6),re.getString(7),re.getString(8)});
+                modelo.addRow(new Object[]{re.getInt(1),re.getString(2),re.getString(3),re.getInt(4),re.getInt(5),re.getString(6)});
             }
             tabla.setModel(modelo);
         } catch (Exception e) {
@@ -48,11 +48,11 @@ public class Generarfactura extends javax.swing.JFrame {
     {
         DefaultTableModel modelo=new DefaultTableModel();
         ResultSet re=obj.obj.n2.llenartabla("select * from reportes where idcliente='"+id+"'");
-        modelo.setColumnIdentifiers(new Object[]{"idreporte","descripcion","tipo","idrepuesto","valor","idmecanico","idmatricula","idcliente"});
+        modelo.setColumnIdentifiers(new Object[]{"idfactura","fecha","valor","idmatricula","idcliente","idmecanico"});
         try {
             while(re.next())
             {
-                modelo.addRow(new Object[]{re.getInt(1),re.getString(2),re.getString(3),re.getInt(4),re.getInt(5),re.getString(6),re.getString(7),re.getString(8)});
+                modelo.addRow(new Object[]{re.getInt(1),re.getString(2),re.getString(3),re.getInt(4),re.getInt(5),re.getString(6)});
             }
             tabla.setModel(modelo);
         } catch (Exception e) {
@@ -74,8 +74,10 @@ public class Generarfactura extends javax.swing.JFrame {
         t1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         t2 = new com.toedter.calendar.JDateChooser();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -95,57 +97,34 @@ public class Generarfactura extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabla);
 
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 103, 700, 330));
+
         jButton1.setText("Cancelar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(617, 6, -1, -1));
 
         t1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 t1KeyReleased(evt);
             }
         });
+        getContentPane().add(t1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, 180, 35));
 
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel1.setForeground(java.awt.Color.darkGray);
         jLabel1.setText("IDCLIENTE:");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
 
         t2.setDateFormatString("yyyy/MM/dd HH:mm:ss");
+        getContentPane().add(t2, new org.netbeans.lib.awtextra.AbsoluteConstraints(448, 47, 250, 38));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 692, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(t1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(t2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(t1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1))
-                    .addComponent(t2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34))
-        );
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/7d514ce90eed62493f6938af1c26a477.jpg"))); // NOI18N
+        jLabel2.setText("jLabel2");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 510));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -156,21 +135,21 @@ public class Generarfactura extends javax.swing.JFrame {
     }//GEN-LAST:event_t1KeyReleased
 
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
+        int check=2;
         int seleccionar=tabla.rowAtPoint(evt.getPoint());
-        String idreport=(String.valueOf(tabla.getValueAt(seleccionar, 0)));
-        int idreporte=Integer.parseInt(idreport);
-        String descripcion=(String.valueOf(tabla.getValueAt(seleccionar, 1)));
-        String tipo=(String.valueOf(tabla.getValueAt(seleccionar, 2)));
-        String idrepuesto=(String.valueOf(tabla.getValueAt(seleccionar, 3)));
-        String valor=(String.valueOf(tabla.getValueAt(seleccionar, 4)));
+        String idfactura=(String.valueOf(tabla.getValueAt(seleccionar, 0)));
+        int idreporte=Integer.parseInt(idfactura);
+        String fecha2=(String.valueOf(tabla.getValueAt(seleccionar, 1)));
+        String valor=(String.valueOf(tabla.getValueAt(seleccionar, 2)));
+        String idmatricula=(String.valueOf(tabla.getValueAt(seleccionar, 3)));
+        String idcliente=(String.valueOf(tabla.getValueAt(seleccionar, 4)));
          int valorx=Integer.parseInt(valor)+10000;
         String idmecanico=(String.valueOf(tabla.getValueAt(seleccionar, 5)));
-        String idmatricula=(String.valueOf(tabla.getValueAt(seleccionar, 6)));
-        String idcliente=(String.valueOf(tabla.getValueAt(seleccionar, 7)));
+        
         String fecha=((JTextField)t2.getDateEditor().getUiComponent()).getText();
-        obj.obj.n2.guardarfactura(fecha, valorx, idmatricula, idcliente, idmecanico, idrepuesto);
-        obj.obj.n2.eliminarvehiculo(idmatricula);
-        obj.obj.n2.eliminarreporte(idreporte);
+       
+        obj.obj.n2.actualizavehiculo2(idmatricula, fecha);
+       
         obj.mostrar();
         obj.setVisible(true);
         this.dispose();
@@ -190,6 +169,7 @@ public class Generarfactura extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField t1;
     private com.toedter.calendar.JDateChooser t2;

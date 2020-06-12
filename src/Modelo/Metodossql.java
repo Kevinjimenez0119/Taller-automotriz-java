@@ -65,7 +65,7 @@ public class Metodossql {
         }
        
     }
-    public static String buscarvehiculo(String matricula)
+    public static String buscarvehiculo(String matricula, String fechas)
     {
         String busqueda=null;
         Connection con=null;
@@ -73,7 +73,7 @@ public class Metodossql {
         ResultSet resultado;
         try {
             con = conectar.conectar();
-            String sentencia_buscar=("SELECT idmatricula FROM vehiculos WHERE idmatricula = '"+matricula+"'");
+            String sentencia_buscar=("SELECT idmatricula FROM vehiculos WHERE idmatricula = '"+matricula+"' and fechasalida = '"+0+"'");
             sentencia = (PreparedStatement) con.prepareStatement(sentencia_buscar);
             resultado = sentencia.executeQuery();
             if(resultado.next())
@@ -89,7 +89,7 @@ public class Metodossql {
         }
         return busqueda;
     }
-    public void guardarvehiculo(String matricula, String tipovehiculo, String modelo, String color, String fecha, String idcliente)
+    public void guardarvehiculo(String matricula, String tipovehiculo, String modelo, String color, String fecha,String fechas, String idcliente)
     {
         
         
@@ -98,7 +98,115 @@ public class Metodossql {
             conectar c=new conectar();
             Connection cone=null;
             cone = conectar.conectar();
-            String sentencia_guardar ="INSERT INTO vehiculos VALUES ('"+matricula+"','"+tipovehiculo+"','"+modelo+"','"+color+"','"+fecha+"','"+idcliente+"')";
+            String sentencia_guardar ="INSERT INTO vehiculos VALUES ('"+matricula+"','"+tipovehiculo+"','"+modelo+"','"+color+"','"+fecha+"','"+fechas+"','"+idcliente+"')";
+            
+            PreparedStatement se= (PreparedStatement) cone.prepareStatement(sentencia_guardar);
+            se.executeUpdate();
+            
+            
+           
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+       
+    }
+    public void guardarcompra(String repuesto, int factura, int valor)
+    {
+        
+        
+        
+        try {
+            conectar c=new conectar();
+            Connection cone=null;
+            cone = conectar.conectar();
+            String sentencia_guardar ="INSERT INTO comprar (idrepuestos,idfactura,valor) VALUES ('"+repuesto+"','"+factura+"','"+valor+"')";
+            
+            PreparedStatement se= (PreparedStatement) cone.prepareStatement(sentencia_guardar);
+            se.executeUpdate();
+            
+            
+           
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+       
+    }
+    public void actualizavehiculo2(String matricula, String fechas)
+    {
+        
+        
+        
+        try {
+            conectar c=new conectar();
+            Connection cone=null;
+            cone = conectar.conectar();
+            String sentencia_guardar ="update vehiculos set fechasalida  = '"+fechas+"' where idmatricula = '"+matricula+"'";
+            
+            PreparedStatement se= (PreparedStatement) cone.prepareStatement(sentencia_guardar);
+            se.executeUpdate();
+            
+            
+           
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+       
+        
+    }
+     public void actualizafactura(int id, int valor)
+    {
+        
+        
+        
+        try {
+            conectar c=new conectar();
+            Connection cone=null;
+            cone = conectar.conectar();
+            String sentencia_guardar ="update facturas set valor  = '"+valor+"' where idfactura = '"+id+"'";
+            
+            PreparedStatement se= (PreparedStatement) cone.prepareStatement(sentencia_guardar);
+            se.executeUpdate();
+            
+            
+           
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+       
+        
+    }
+    public void actualizacomprar(int id, int idfactura)
+    {
+        
+        
+        
+        try {
+            conectar c=new conectar();
+            Connection cone=null;
+            cone = conectar.conectar();
+            String sentencia_guardar ="update comprar set idfactura  = '"+idfactura+"' where idcompra = '"+id+"'";
+            
+            PreparedStatement se= (PreparedStatement) cone.prepareStatement(sentencia_guardar);
+            se.executeUpdate();
+            
+            
+           
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+       
+        
+    }
+    public void actualizareporte(int reporte, int chec)
+    {
+        
+        
+        
+        try {
+            conectar c=new conectar();
+            Connection cone=null;
+            cone = conectar.conectar();
+            String sentencia_guardar ="update reportes set checkeado  = '"+chec+"' where idreporte = '"+reporte+"'";
             
             PreparedStatement se= (PreparedStatement) cone.prepareStatement(sentencia_guardar);
             se.executeUpdate();
@@ -219,7 +327,7 @@ public class Metodossql {
         }
         return resultado;
     }
-    public void guardarasignado(String idmecanico, String idmatricula, String idcliente)
+    public void guardarasignado(String idmecanico, String idmatricula, String idcliente, int revisado)
     {
         
         
@@ -228,7 +336,7 @@ public class Metodossql {
             conectar c=new conectar();
             Connection cone=null;
             cone = conectar.conectar();
-            String sentencia_guardar ="INSERT INTO mecanicoasignado (idmecanico,idmatricula,idcliente) VALUES ('"+idmecanico+"','"+idmatricula+"','"+idcliente+"')";
+            String sentencia_guardar ="INSERT INTO mecanicoasignado (idmecanico,idmatricula,idcliente,revisado) VALUES ('"+idmecanico+"','"+idmatricula+"','"+idcliente+"','"+revisado+"')";
             
             PreparedStatement se= (PreparedStatement) cone.prepareStatement(sentencia_guardar);
             se.executeUpdate();
@@ -240,7 +348,7 @@ public class Metodossql {
         }
        
     }
-    public void guardarreporte(String descripcion, String tipo, String idrepuesto, int valor, String mecanico, String matricula, String cliente)
+    public void actualizaasignado(String idasignado, int revision)
     {
         
         
@@ -249,7 +357,28 @@ public class Metodossql {
             conectar c=new conectar();
             Connection cone=null;
             cone = conectar.conectar();
-            String sentencia_guardar ="INSERT INTO reportes (descripción,tiposervicio,idrepuesto,valor,idmecanico,idmatricula,idcliente) VALUES ('"+descripcion+"','"+tipo+"','"+idrepuesto+"','"+valor+"','"+mecanico+"','"+matricula+"','"+cliente+"')";
+            String sentencia_guardar ="update mecanicoasignado set revisado  = '"+revision+"' where idasignado = '"+idasignado+"'";
+            
+            PreparedStatement se= (PreparedStatement) cone.prepareStatement(sentencia_guardar);
+            se.executeUpdate();
+            
+            
+           
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+       
+    }
+    public void guardarreporte(String descripcion, String tipo, int valor, String mecanico, String matricula, String cliente, int chec)
+    {
+        
+        
+        
+        try {
+            conectar c=new conectar();
+            Connection cone=null;
+            cone = conectar.conectar();
+            String sentencia_guardar ="INSERT INTO reportes (descripción,tiposervicio,valor,idmecanico,idmatricula,idcliente,checkeado) VALUES ('"+descripcion+"','"+tipo+"','"+valor+"','"+mecanico+"','"+matricula+"','"+cliente+"','"+chec+"')";
             
             PreparedStatement se= (PreparedStatement) cone.prepareStatement(sentencia_guardar);
             se.executeUpdate();
@@ -340,7 +469,8 @@ public class Metodossql {
         }
         return resultado;
     }
-    public void eliminarasignado(int idasignado)
+    
+    public void guardarfactura(String fecha, int valor, String matricula, String cliente, String mecanico)
     {
         
         
@@ -349,28 +479,7 @@ public class Metodossql {
             conectar c=new conectar();
             Connection cone=null;
             cone = conectar.conectar();
-            String sentencia_guardar ="delete from mecanicoasignado where idasignado = '"+idasignado+"'";
-            
-            PreparedStatement se= (PreparedStatement) cone.prepareStatement(sentencia_guardar);
-            se.executeUpdate();
-            
-            
-           
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-       
-    }
-    public void guardarfactura(String fecha, int valor, String matricula, String cliente, String mecanico, String repuesto)
-    {
-        
-        
-        
-        try {
-            conectar c=new conectar();
-            Connection cone=null;
-            cone = conectar.conectar();
-            String sentencia_guardar ="INSERT INTO facturas (fecha,valor,idmatricula,idcliente,idmecanico,idrepuesto) VALUES ('"+fecha+"','"+valor+"','"+matricula+"','"+cliente+"','"+mecanico+"','"+repuesto+"')";
+            String sentencia_guardar ="INSERT INTO facturas (fecha,valor,idmatricula,idcliente,idmecanico) VALUES ('"+fecha+"','"+valor+"','"+matricula+"','"+cliente+"','"+mecanico+"')";
             
             PreparedStatement se= (PreparedStatement) cone.prepareStatement(sentencia_guardar);
             se.executeUpdate();
@@ -517,6 +626,30 @@ public class Metodossql {
         try {
             con = conectar.conectar();
             String sentencia_buscar=("SELECT idmecanico FROM mecanicos WHERE idmecanico = '"+id+"'");
+            sentencia = (PreparedStatement) con.prepareStatement(sentencia_buscar);
+            resultado = sentencia.executeQuery();
+            if(resultado.next())
+            {
+                busqueda = "encontrado";
+            }else
+            {
+                busqueda = "no encontrado";
+            }
+            con.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return busqueda;
+    }
+     public static String buscarfactura(int id)
+    {
+        String busqueda=null;
+        Connection con=null;
+        PreparedStatement sentencia;
+        ResultSet resultado;
+        try {
+            con = conectar.conectar();
+            String sentencia_buscar=("SELECT idfactura FROM facturas WHERE idfactura = '"+id+"'");
             sentencia = (PreparedStatement) con.prepareStatement(sentencia_buscar);
             resultado = sentencia.executeQuery();
             if(resultado.next())
@@ -793,7 +926,7 @@ public class Metodossql {
         }
         return busqueda;
     }
-    public void guardarrepuesto(String id, String marca, String modelo, String referencia, int precio, int valor, int cantidad, String iddistribuidor)
+    public void guardarrepuesto(String id, String marca, String modelo, String referencia, int valor, int cantidad, String iddistribuidor)
     {
         
         
@@ -802,7 +935,7 @@ public class Metodossql {
             conectar c=new conectar();
             Connection cone=null;
             cone = conectar.conectar();
-            String sentencia_guardar ="INSERT INTO repuestos VALUES ('"+id+"','"+marca+"','"+modelo+"','"+referencia+"','"+precio+"','"+valor+"','"+cantidad+"','"+iddistribuidor+"')";
+            String sentencia_guardar ="INSERT INTO repuestos VALUES ('"+id+"','"+marca+"','"+modelo+"','"+referencia+"','"+valor+"','"+cantidad+"','"+iddistribuidor+"')";
             
             PreparedStatement se= (PreparedStatement) cone.prepareStatement(sentencia_guardar);
             se.executeUpdate();
@@ -814,7 +947,7 @@ public class Metodossql {
         }
        
     }
-     public void actualizarrepuesto(String id, String marca, String modelo, String referencia, int precio, int valor, int cantidad, String iddistribuidor)
+     public void actualizarrepuesto(String id, String marca, String modelo, String referencia, int valor, int cantidad, String iddistribuidor)
     {
         
         
@@ -823,7 +956,7 @@ public class Metodossql {
             conectar c=new conectar();
             Connection cone=null;
             cone = conectar.conectar();
-            String sentencia_guardar ="update repuestos set marca  = '"+marca+"',modelo  = '"+modelo+"',referencia  = '"+referencia+"',preciounidad = '"+precio+"',valor = '"+valor+"',cantidadstock = '"+cantidad+"',iddistribuidor = '"+iddistribuidor+"' where idrepuestos = '"+id+"'";
+            String sentencia_guardar ="update repuestos set marca  = '"+marca+"',modelo  = '"+modelo+"',referencia  = '"+referencia+"',valor = '"+valor+"',cantidadstock = '"+cantidad+"',iddistribuidor = '"+iddistribuidor+"' where idrepuestos = '"+id+"'";
             
             PreparedStatement se= (PreparedStatement) cone.prepareStatement(sentencia_guardar);
             se.executeUpdate();
@@ -835,7 +968,7 @@ public class Metodossql {
         }
        
     }
-     public void guardarpedido(String idd, String idr, int cantidad)
+     public void guardarpedido(String idd, String idr, int cantidad, String marca, String modelo, String referencia, int preciounidad, int valor)
     {
         
         
@@ -844,7 +977,7 @@ public class Metodossql {
             conectar c=new conectar();
             Connection cone=null;
             cone = conectar.conectar();
-            String sentencia_guardar ="INSERT INTO pedido (iddistribuidor,idrepuesto,cantidad) VALUES ('"+idd+"','"+idr+"','"+cantidad+"')";
+            String sentencia_guardar ="INSERT INTO pedido (iddistribuidor,idrepuesto,cantidad,marca,modelo,referencia,preciounidad,valor) VALUES ('"+idd+"','"+idr+"','"+cantidad+"','"+marca+"','"+modelo+"','"+referencia+"','"+preciounidad+"','"+valor+"')";
             
             PreparedStatement se= (PreparedStatement) cone.prepareStatement(sentencia_guardar);
             se.executeUpdate();

@@ -63,8 +63,8 @@ public class Ingresarvehiculo extends javax.swing.JFrame {
 
         t1 = new javax.swing.JTextField();
         t2 = new javax.swing.JTextField();
-        t3 = new javax.swing.JTextField();
         t4 = new com.toedter.calendar.JDateChooser();
+        t3 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -76,33 +76,49 @@ public class Ingresarvehiculo extends javax.swing.JFrame {
         tabla = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
         t10 = new javax.swing.JTextField();
-        b2 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         t1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 t1ActionPerformed(evt);
             }
         });
+        getContentPane().add(t1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 180, 35));
+        getContentPane().add(t2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 180, 36));
+        getContentPane().add(t4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 290, 40));
 
         t3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 t3ActionPerformed(evt);
             }
         });
+        getContentPane().add(t3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, 180, 36));
 
-        t4.setDateFormatString("yyyy/MM/dd HH:mm:ss");
-
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("MATRICULA:");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("TIPO VEHICULO:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 80, -1, -1));
 
+        jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("MODELO:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 132, -1, -1));
 
+        jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("COLOR:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 189, -1, -1));
 
         c1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Automovil", "Motocicleta" }));
+        getContentPane().add(c1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 180, 32));
 
         b1.setText("Ingresar");
         b1.addActionListener(new java.awt.event.ActionListener() {
@@ -110,6 +126,7 @@ public class Ingresarvehiculo extends javax.swing.JFrame {
                 b1ActionPerformed(evt);
             }
         });
+        getContentPane().add(b1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, -1, -1));
 
         b3.setText("Cancelar");
         b3.addActionListener(new java.awt.event.ActionListener() {
@@ -117,6 +134,7 @@ public class Ingresarvehiculo extends javax.swing.JFrame {
                 b3ActionPerformed(evt);
             }
         });
+        getContentPane().add(b3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, -1, -1));
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -136,101 +154,22 @@ public class Ingresarvehiculo extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabla);
 
-        jLabel5.setText("MATRICULA:");
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 90, -1, 167));
+
+        jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("BUSCAR POR MATRICULA:");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 30, -1, -1));
 
         t10.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 t10KeyReleased(evt);
             }
         });
+        getContentPane().add(t10, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 20, 180, 32));
 
-        b2.setText("Ingresar vehiculo seleccionado");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(t4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
-                                .addComponent(t3, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addGap(42, 42, 42))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addGap(18, 18, 18)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(t1)
-                                    .addComponent(c1, 0, 211, Short.MAX_VALUE)
-                                    .addComponent(t2)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(b1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(b3)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(18, 18, 18)
-                                .addComponent(t10, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(150, 150, 150)
-                        .addComponent(b2)))
-                .addContainerGap(11, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(t1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel5)
-                    .addComponent(t10, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(c1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(t2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(t3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addGap(26, 26, 26)
-                        .addComponent(t4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(b1)
-                        .addComponent(b3))
-                    .addComponent(b2))
-                .addContainerGap())
-        );
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/7d514ce90eed62493f6938af1c26a477.jpg"))); // NOI18N
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 980, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -262,10 +201,11 @@ public class Ingresarvehiculo extends javax.swing.JFrame {
         String modelo=t2.getText();
         String color=t3.getText();
         String fecha=((JTextField)t4.getDateEditor().getUiComponent()).getText();
+        String fechasb="1";
                 
-        if(obj.obj.n2.buscarvehiculo(matricula).equals("no encontrado"))
+        if(obj.obj.n2.buscarvehiculo(matricula,fechasb).equals("no encontrado"))
         {
-            obj.obj.n2.guardarvehiculo(matricula, tipo, modelo, color, fecha, cliente);
+            
             if(obj.obj.n2.buscarvehiculoreg(matricula).equals("no encontrado"))
             {
                 obj.obj.n2.guardarvehiculoreg(matricula, tipo, modelo, color, cliente);
@@ -292,9 +232,11 @@ public class Ingresarvehiculo extends javax.swing.JFrame {
         String color=(String.valueOf(tabla.getValueAt(seleccionar, 3)));
         String idcliente=(String.valueOf(tabla.getValueAt(seleccionar, 4)));
         String fecha=((JTextField)t4.getDateEditor().getUiComponent()).getText();
-        if(obj.obj.n2.buscarvehiculo(matricula).equals("no encontrado"))
+        String fechas="0";
+        
+        if(obj.obj.n2.buscarvehiculo(matricula,fechas).equals("no encontrado"))
         {
-            obj.obj.n2.guardarvehiculo(matricula, tipo, modelo, color, fecha, idcliente);
+            obj.obj.n2.guardarvehiculo(matricula, tipo, modelo, color, fecha, fechas, idcliente);
             
             
             obj.mostrar();
@@ -315,7 +257,6 @@ public class Ingresarvehiculo extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton b1;
-    private javax.swing.JButton b2;
     private javax.swing.JButton b3;
     private javax.swing.JComboBox<String> c1;
     private javax.swing.JLabel jLabel1;
@@ -323,6 +264,7 @@ public class Ingresarvehiculo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField t1;
     private javax.swing.JTextField t10;

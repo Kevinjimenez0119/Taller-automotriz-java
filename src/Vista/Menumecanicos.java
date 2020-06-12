@@ -6,7 +6,10 @@
 package Vista;
 
 import java.sql.ResultSet;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -18,6 +21,7 @@ public class Menumecanicos extends javax.swing.JFrame {
     /**
      * Creates new form Menumecanicos
      */
+    Calendar fe=new GregorianCalendar();
     public final Escogervehiculo obj;
     String mecanico;
     String matricula;
@@ -29,17 +33,18 @@ public class Menumecanicos extends javax.swing.JFrame {
         setResizable(false);
         this.obj=obj;
         mostrar();
+        k2.setCalendar(fe);
         
     }
 public void mostrar()
     {
         DefaultTableModel modelo=new DefaultTableModel();
         ResultSet re=obj.obj.n2.llenartabla("select * from repuestos");
-        modelo.setColumnIdentifiers(new Object[]{"idrepuesto","marca","modelo","referencia","preciounidad","valor","cantidad","iddistribuidor"});
+        modelo.setColumnIdentifiers(new Object[]{"idrepuesto","marca","modelo","referencia","valor","cantidad","iddistribuidor"});
         try {
             while(re.next())
             {
-                modelo.addRow(new Object[]{re.getString(1),re.getString(2),re.getString(3),re.getString(4),re.getString(5),re.getString(6),re.getString(7),re.getString(8)});
+                modelo.addRow(new Object[]{re.getString(1),re.getString(2),re.getString(3),re.getString(4),re.getString(5),re.getString(6),re.getString(7)});
             }
             tabla.setModel(modelo);
         } catch (Exception e) {
@@ -50,15 +55,66 @@ public void mostrar()
     {
         DefaultTableModel modelo=new DefaultTableModel();
         ResultSet re=obj.obj.n2.llenartabla("select * from repuestos where referencia ='"+id+"'");
-        modelo.setColumnIdentifiers(new Object[]{"idrepuesto","marca","modelo","referencia","preciounidad","valor","cantidad","iddistribuidor"});
+        modelo.setColumnIdentifiers(new Object[]{"idrepuesto","marca","modelo","referencia","valor","cantidad","iddistribuidor"});
+        try {
+            while(re.next())
+            {
+                modelo.addRow(new Object[]{re.getString(1),re.getString(2),re.getString(3),re.getString(4),re.getString(5),re.getString(6),re.getString(7)});
+            }
+            tabla.setModel(modelo);
+        } catch (Exception e) {
+        }
+    }
+ public void mostrar3()
+    {
+        DefaultTableModel modelo=new DefaultTableModel();
+         ResultSet re=obj.obj.n2.llenartabla("select max(idfactura) ultimo from facturas");
+        try {
+                     while(re.next())
+                     {
+                         
+                 
+                ResultSet re2=obj.obj.n2.llenartabla("select * from comprar where idfactura='"+re.getInt(1)+"'");
+        modelo.setColumnIdentifiers(new Object[]{"idcompra","idrepuesto","idfactura"});
+        try {
+            while(re2.next())
+            {
+                modelo.addRow(new Object[]{re2.getString(1),re2.getString(2),re2.getString(3)});
+            }
+            tabla2.setModel(modelo);
+        } catch (Exception e) {
+        }
+                     }
+            
+                 
+        
+                 
+                 
+        } catch (Exception e) {
+        }
+        
+    }
+ public void mostrar4()
+    {
+        DefaultTableModel modelo=new DefaultTableModel();
+        
+                         
+                 
+                ResultSet re=obj.obj.n2.llenartabla("select * from facturas ");
+        modelo.setColumnIdentifiers(new Object[]{"idfactura","fecha","valor","matricula","cliente","mecanico"});
         try {
             while(re.next())
             {
                 modelo.addRow(new Object[]{re.getString(1),re.getString(2),re.getString(3),re.getString(4),re.getString(5),re.getString(6)});
             }
-            tabla.setModel(modelo);
+            tabla3.setModel(modelo);
         } catch (Exception e) {
         }
+                     
+            
+            
+                 
+              
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -74,13 +130,25 @@ public void mostrar()
         t1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         c1 = new javax.swing.JComboBox<>();
+        k2 = new com.toedter.calendar.JDateChooser();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
         t2 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tabla2 = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tabla3 = new javax.swing.JTable();
+        jButton4 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton1.setText("Salir");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -88,12 +156,22 @@ public void mostrar()
                 jButton1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1113, 13, 90, 30));
 
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("DESCRIPCION:");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
+        getContentPane().add(t1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 210, 28));
 
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("TIPO DE SERVICIO:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 138, -1, -1));
 
         c1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "cambio", "reparacion", "diagnostico" }));
+        getContentPane().add(c1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 210, 32));
+        getContentPane().add(k2, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 70, 280, 30));
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -113,6 +191,8 @@ public void mostrar()
         });
         jScrollPane1.setViewportView(tabla);
 
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, -1, 290));
+
         t2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 t2MouseClicked(evt);
@@ -128,8 +208,12 @@ public void mostrar()
                 t2KeyReleased(evt);
             }
         });
+        getContentPane().add(t2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 210, 33));
 
+        jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("REFERENCIA:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 188, -1, -1));
 
         jButton2.setText("Generar reporte");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -137,62 +221,67 @@ public void mostrar()
                 jButton2ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 70, 170, 48));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addGap(22, 22, 22)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(t2, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(t1)
-                                    .addComponent(c1, 0, 214, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton2))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(t1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(25, 25, 25)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(c1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(t2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2)))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jButton3.setText("Agregar repuesto");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 150, 170, 45));
+
+        tabla2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(tabla2);
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 230, 267, 290));
+
+        tabla3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(tabla3);
+
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 230, -1, 290));
+
+        jButton4.setText("Generar factura");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 170, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        jLabel4.setText("MENÚ MECÁNICOS");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 20, -1, -1));
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/7d514ce90eed62493f6938af1c26a477.jpg"))); // NOI18N
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -280, 900, 1090));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/P2.jpg"))); // NOI18N
+        jLabel6.setText("jLabel6");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, -60, 370, 630));
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/P2.jpg"))); // NOI18N
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -212,6 +301,8 @@ public void mostrar()
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         int fila=tabla.getSelectedRow();
+        int revision=2;
+        int checkeado=1;
         String descripcion=t1.getText();
        String tipo=c1.getSelectedItem().toString();
        
@@ -229,7 +320,7 @@ public void mostrar()
           if(tipo.equals("cambio"))
            {
                
-                 obj.obj.n2.guardarreporte(descripcion, tipo, id2, valorx, mecanico, matricula, cliente);
+                 obj.obj.n2.guardarreporte(descripcion, tipo, valorx, mecanico, matricula, cliente, checkeado);
                  ResultSet re=obj.obj.n2.Buscarreporte();
                  try {
                  while(re.next())
@@ -237,7 +328,8 @@ public void mostrar()
                 obj.obj.n2.guardarcambio(descripcion, re.getInt(1), id2);
             }
                 int id3=Integer.parseInt(idasignado);
-                obj.obj.n2.eliminarasignado(id3);
+                obj.obj.n2.actualizaasignado(idasignado,revision);
+                
                 obj.obj.n2.actualizarrepuesto(id2, can);
                 obj.mostrar(mecanico);
                 obj.setVisible(true);
@@ -260,7 +352,7 @@ public void mostrar()
                
                String no="0";
                int no2=0;
-                 obj.obj.n2.guardarreporte(descripcion, tipo, no, no2, mecanico, matricula, cliente);
+                 obj.obj.n2.guardarreporte(descripcion, tipo, no2, mecanico, matricula, cliente, checkeado);
                  ResultSet re=obj.obj.n2.Buscarreporte();
                  try {
                    while(re.next())
@@ -268,7 +360,7 @@ public void mostrar()
                 obj.obj.n2.guardardiagnostico(descripcion, re.getInt(1));
             }
                 int id=Integer.parseInt(idasignado);
-                obj.obj.n2.eliminarasignado(id);
+                obj.obj.n2.actualizaasignado(idasignado,revision);
                 obj.mostrar(mecanico);
                 obj.setVisible(true);
                 this.dispose();
@@ -279,7 +371,7 @@ public void mostrar()
            {
                String no="0";
                int no2=0;
-               obj.obj.n2.guardarreporte(descripcion, tipo, no, no2, mecanico, matricula, cliente);
+               obj.obj.n2.guardarreporte(descripcion, tipo, no2, mecanico, matricula, cliente, checkeado);
                  ResultSet re=obj.obj.n2.Buscarreporte();
                  try {
                    while(re.next())
@@ -287,7 +379,7 @@ public void mostrar()
                 obj.obj.n2.guardarreparacion(descripcion, re.getInt(1));
             }
                 int id=Integer.parseInt(idasignado);
-                obj.obj.n2.eliminarasignado(id);
+                obj.obj.n2.actualizaasignado(idasignado,revision);
                 obj.mostrar(mecanico);
                 obj.setVisible(true);
                 this.dispose();
@@ -310,6 +402,74 @@ public void mostrar()
         mostrar2(ref);
     }//GEN-LAST:event_t2KeyReleased
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        int fila=tabla.getSelectedRow();
+        String id2=(String.valueOf(tabla.getValueAt(fila, 0)));
+                 String valor=(String.valueOf(tabla.getValueAt(fila, 4)));
+                 String cantidad=(String.valueOf(tabla.getValueAt(fila, 5)));
+                 String fecha=((JTextField)k2.getDateEditor().getUiComponent()).getText();
+                 int valorx=Integer.parseInt(valor)+10000;
+                 int can=Integer.parseInt(cantidad);
+                 int valort=0;
+                 ResultSet re=obj.obj.n2.llenartabla("select max(idfactura) ultimo from facturas");
+                 
+                     
+                   
+                   
+                     
+                     
+                 
+         
+                 try {
+                     while(re.next())
+                     {
+                         obj.obj.n2.guardarcompra(id2, re.getInt(1), valorx);
+                        
+                         ResultSet re2=obj.obj.n2.llenartabla("select valor ultimo from comprar where idfactura ='"+re.getInt(1)+"'");
+                         try {
+                             while(re2.next())
+                             {
+                                 valort+=re2.getInt(1);
+                                 obj.obj.n2.actualizafactura(re.getInt(1), valort);
+                             }
+                         } catch (Exception e) {
+                         }
+                         mostrar3();
+                 
+                 mostrar();mostrar4();
+                     }
+            
+                 
+        
+                 
+                 
+        } catch (Exception e) {
+        }
+                    
+                 
+                
+                 
+                 
+                 
+                 
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+         
+                 String fecha=((JTextField)k2.getDateEditor().getUiComponent()).getText();
+                 int valorx=10000;
+                 
+        
+           
+                   
+                     obj.obj.n2.guardarfactura(fecha, valorx, matricula, cliente, mecanico);
+                     
+                   
+            mostrar4();
+                  
+       
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -319,12 +479,23 @@ public void mostrar()
     private javax.swing.JComboBox<String> c1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private com.toedter.calendar.JDateChooser k2;
     private javax.swing.JTextField t1;
     private javax.swing.JTextField t2;
     private javax.swing.JTable tabla;
+    private javax.swing.JTable tabla2;
+    private javax.swing.JTable tabla3;
     // End of variables declaration//GEN-END:variables
 }
